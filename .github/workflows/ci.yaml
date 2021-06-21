@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths-ignore:
+      - "**.md"
+env:
+  TF_VAR_GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+jobs:
+  terraform:
+    name: Terraform CI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    timeout-minutes: 5
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1.3.2
+      with:
+        terraform_version: 1.0.0
+
+    - name: Terraform format
+      run: terraform fmt -recursive -check
+
+    - name: Terraform init
+      run: terraform init
+
+    - name: Terraform validate
+      run: terraform validate
+
+    - name: Terraform plan
+      run: terraform plan
