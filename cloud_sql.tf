@@ -7,3 +7,10 @@ resource "google_sql_database_instance" "cookingbomb" {
     tier = "db-f1-micro"
   }
 }
+
+resource "google_sql_database" "cookingbomb_database" {
+  name      = "cooking_bomb"
+  instance  = google_sql_database_instance.cookingbomb.name
+  charset   = "utf8mb4"
+  collation = "utf8mb4_bin"
+}
