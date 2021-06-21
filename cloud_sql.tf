@@ -14,3 +14,10 @@ resource "google_sql_database" "cookingbomb_database" {
   charset   = "utf8mb4"
   collation = "utf8mb4_bin"
 }
+
+resource "google_sql_user" "cookingbomb_root" {
+  name     = "root"
+  instance = google_sql_database_instance.cookingbomb.name
+  host     = "%"
+  password = var.MYSQL_ROOT_PASSWORD
+}
