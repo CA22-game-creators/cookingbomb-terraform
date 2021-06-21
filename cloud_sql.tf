@@ -1,4 +1,4 @@
-resource "google_sql_database_instance" "cooking_bomb" {
+resource "google_sql_database_instance" "cookingbomb" {
   name             = "cookingbomb-mysql"
   database_version = "MYSQL_8_0"
   region           = "us-west1"
