@@ -38,7 +38,9 @@ jobs:
       run: terraform validate
 
     - name: Terraform plan
+      id: plan
       run: terraform plan
 
     - name: Terraform apply
+      if: ${{ steps.plan.outputs.tf_actions_plan_has_changes == 'true' }}
       run: terraform -auto-approve
