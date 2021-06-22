@@ -1,0 +1,46 @@
+name: cd
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "**.md"
+env:
+  TF_VAR_GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  TF_VAR_MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+
+jobs:
+  terraform:
+    name: Terraform CD
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    timeout-minutes: 10
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1.3.2
+      with:
+        terraform_version: 1.0.0
+
+    - name: Terraform format
+      run: terraform fmt -recursive -check
+
+    - name: Terraform init
+      run: terraform init
+
+    - name: Terraform validate
+      run: terraform validate
+
+    - name: Terraform plan
+      id: plan
+      run: terraform plan
+
+    - name: Terraform apply
+      if: ${{ steps.plan.outputs.tf_actions_plan_has_changes == 'true' }}
+      run: terraform -auto-approve
