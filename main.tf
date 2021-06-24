@@ -1,12 +1,10 @@
 provider "google" {
-  credentials = var.GOOGLE_CREDENTIALS
-  project     = "cooking-bomb"
-  region      = "asia-northeast1"
-  zone        = "asia-northeast1-a"
+  project = "cooking-bomb"
+  region  = "us-west1"
 }
 
-# terraform {
-#   backend "gcs" {
-#     bucket = google_storage_bucket.terraform_state.name
-#   }
-# }
+terraform {
+  backend "gcs" {
+    bucket = "cookingbomb-tfstate-bucket"
+  }
+}

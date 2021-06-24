@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "terraform_state" {
-  name          = "terraform-state-bucket"
+  name          = "cookingbomb-tfstate-bucket"
   location      = "us-west1"
   storage_class = "REGIONAL"
 

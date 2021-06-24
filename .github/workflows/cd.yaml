@@ -7,9 +7,10 @@ on:
     paths-ignore:
       - "**.md"
 env:
-  TF_VAR_GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  TF_VAR_GOOGLE_PROJECT_NAME: ${{ secrets.GOOGLE_PROJECT_NAME }}
   TF_VAR_MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-  PLAN_OUTPUT: tfplan
 
 jobs:
   terraform:
@@ -18,7 +19,6 @@ jobs:
     defaults:
       run:
         shell: bash
-
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -32,13 +32,13 @@ jobs:
       run: terraform fmt -recursive -check
 
     - name: Terraform init
-      run: terraform init
+      run: terraform init -reconfigure
 
     - name: Terraform validate
       run: terraform validate
 
     - name: Terraform plan
-      run: terraform plan -out $PLAN_OUTPUT
+      run: terraform plan
 
     - name: Terraform apply
-      run: terraform apply -auto-approve $PLAN_OUTPUT
+      run: terraform apply -auto-approve

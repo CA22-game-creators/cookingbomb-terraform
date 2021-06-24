@@ -6,7 +6,9 @@ on:
     paths-ignore:
       - "**.md"
 env:
-  TF_VAR_GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  TF_VAR_GOOGLE_PROJECT_NAME: ${{ secrets.GOOGLE_PROJECT_NAME }}
   TF_VAR_MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
 
 jobs:
@@ -16,7 +18,6 @@ jobs:
     defaults:
       run:
         shell: bash
-    timeout-minutes: 5
 
     steps:
     - name: Checkout

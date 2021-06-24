@@ -1,5 +1,2 @@
-variable "GOOGLE_CREDENTIALS" {
-}
-
-variable "MYSQL_ROOT_PASSWORD" {
-}
+variable "GOOGLE_PROJECT_NAME" {}
+variable "MYSQL_ROOT_PASSWORD" {}
