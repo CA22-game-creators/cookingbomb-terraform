@@ -1,2 +1,2 @@
-variable "GOOGLE_PROJECT_NAME" {}
+# from credential
 variable "MYSQL_ROOT_PASSWORD" {}
