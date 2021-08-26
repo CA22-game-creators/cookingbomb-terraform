@@ -49,10 +49,10 @@ data "google_iam_policy" "cookingbomb_api_policy_noauth" {
   }
 }
 
-# resource "google_cloud_run_service_iam_policy" "cookingbomb_api" {
-#   location = google_cloud_run_service.cookingbomb_api.location
-#   project  = google_cloud_run_service.cookingbomb_api.project
-#   service  = google_cloud_run_service.cookingbomb_api.name
+resource "google_cloud_run_service_iam_policy" "cookingbomb_api" {
+  location = google_cloud_run_service.cookingbomb_api.location
+  project  = google_cloud_run_service.cookingbomb_api.project
+  service  = google_cloud_run_service.cookingbomb_api.name
 
-#   policy_data = data.google_iam_policy.cookingbomb_api_policy_noauth.policy_data
-# }
+  policy_data = data.google_iam_policy.cookingbomb_api_policy_noauth.policy_data
+}
