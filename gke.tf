@@ -1,6 +1,6 @@
-resource "google_container_cluster" "primary" {
-  name     = "cookingbomb-cluster"
-  location = "us-west1"
+# resource "google_container_cluster" "primary" {
+#   name     = "cookingbomb-cluster"
+#   location = "us-west1"
 
-  enable_autopilot = true
-}
+#   enable_autopilot = true
+# }
